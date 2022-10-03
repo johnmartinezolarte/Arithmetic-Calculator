@@ -45,6 +45,9 @@ body{
     outline: none;
     text-align: center;
 }
+#val2{
+    display: none;
+}
 #operador{
     background-color:deepskyblue;
     font-size: 2rem;
@@ -54,6 +57,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
 }
 .group-button{
     display: flex;
