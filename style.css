@@ -1,6 +1,6 @@
 *{
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 html{
@@ -14,31 +14,46 @@ body{
     align-items: center;
 }
 .container{
-    border: solid 0.1rem black;
-    width: fit fit-content;
+    border: solid 0.3rem black;
+    width: fit-content;
     height: auto;
-    padding: 20rem 50rem;
-    display: flex;
+    padding: 4rem 6rem;
+    display:flex;
     flex-direction: column;
-    gap: 2rem   ;
+    align-items: center;
+    gap: 2rem;
 }
 #display{
-    border: solid 1px black;
-    height: 4rem;
+    border: solid 0.1rem black;
+    font-size: 2.5rem;
+    height: 5rem;
     width: 20rem;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
 }
 .operation-elements{
     display: flex;
     justify-content: center;
+    gap: 0.5rem;
 }
 .valor{
-    height: 30px;
-    width: 30px;
+    border: solid 0.1rem gray;
+    font-size: 2rem;
+    height: 4rem;
+    width: 6rem;
+    outline: none;
+    text-align: center;
 }
 #operador{
-    background-color: aqua;
-    width: 2rem;
-    height: 3rem;
+    background-color:deepskyblue;
+    font-size: 2rem;
+    font-weight: 700;
+    width: 3rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .group-button{
     display: flex;
@@ -47,7 +62,16 @@ body{
 .btn{
     border: none;
     background-color: gray;
-    width: 2.5rem;
-    height: 2.5rem;
+    font-size: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 0.5rem;
 }
+.btn:hover{
+    opacity: 80%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} 
