@@ -24,9 +24,9 @@ body{
     display:flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
 }
-#display{
+.display{
     background-color: white;
     border: solid 0.1rem black;
     font-size: 2.5rem;
@@ -37,7 +37,7 @@ body{
     align-items: center;
     padding-left: 0.5rem;
 }
-.operation-elements{
+/* .operation-elements{
     margin-top: -1rem;
     display: flex;
     justify-content: center;
@@ -65,7 +65,7 @@ body{
     align-items: center;
     justify-content: center;
     display: none;
-}
+} */
 .group-button{
     display: flex;
     justify-content: center;

@@ -1,13 +1,17 @@
-const tag=parameter=>document.getElementById(parameter)
-const values=document.querySelectorAll('.valor');
-const display=tag('display');
-const operator=tag('operador');
-const sum=tag('suma');
-const subtraction=tag('resta');
-const multiplication=tag('multi');
-const division=tag('division');
-const equals=tag('igual');
-const deleteAC=tag('borrar');
+const display=document.querySelector('.display');
+const operators=document.querySelectorAll('.btn');
+const numbers=document.querySelectorAll('.btn_number');
+
+operators.forEach((x,i)=>{
+    x.addEventListener('click', ()=>operate(i));
+});
+
+numbers.forEach((x,i)=>{
+    x.value=i;
+});
+
+
+
 
 sum.addEventListener('click', ()=>{
     operator.textContent='+';
