@@ -28,10 +28,12 @@ function operate(e){
             /* operation='' */
             key=false;
         }
+    }else if(e===5){
+        if(operation!=='' && key){
+            operation=operation.substring(0,operation.length-1)
+            display.textContent=operation;
 
-
-        
-
+        }
     }else{
         operation=''
         display.textContent=''

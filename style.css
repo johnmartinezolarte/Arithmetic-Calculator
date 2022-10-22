@@ -32,40 +32,11 @@ body{
     font-size: 2.5rem;
     font-weight: 600;
     height: 5rem;
-    width: 80%;
+    width: 100%;
     display: flex;
     align-items: center;
     padding-left: 0.5rem;
 }
-/* .operation-elements{
-    margin-top: -1rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-.valor{
-    border: solid 0.1rem gray;
-    font-size: 2rem;
-    height: 4rem;
-    width: 6rem;
-    outline: none;
-    text-align: center;
-    display: none;
-}
-#val2{
-    display: none;
-}
-#operador{
-    background-color:deepskyblue;
-    font-size: 2rem;
-    font-weight: 700;
-    width: 3rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-} */
 .group-button{
     display: flex;
     justify-content: center;
@@ -76,7 +47,7 @@ body{
     background-color: gray;
     font-size: 2rem;
     font-weight: 600;
-    width: 3.5rem;
+    width: 3rem;
     height: 3.5rem;
     border-radius: 0.5rem;
 }
@@ -84,11 +55,15 @@ body{
     background-color: black;
     color: white;
 }
-#borrar{
+#borrar-todo, #borrar-caracter{
     background-color: orange;
+    width: 4rem;
 }
-#borrar:hover{
+#borrar-todo:hover,#borrar-caracter:hover{
     background-color: red;
+}
+#borrar-caracter{
+    font-size: 1.8rem;
 }
 .btn_number{
     border: none;
@@ -101,8 +76,3 @@ body{
 .footer{
     font-size: 1.5rem;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-} 
