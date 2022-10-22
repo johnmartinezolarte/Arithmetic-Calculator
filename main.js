@@ -8,7 +8,16 @@ operators.forEach((x,i)=>{
 
 numbers.forEach((x,i)=>{
     x.value=i;
+    x.addEventListener('click', ()=>enterNumber(i));
 });
+
+function operate(i){
+    
+
+};
+
+
+
 
 
 
