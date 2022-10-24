@@ -14,25 +14,27 @@ numbers.forEach((x,i)=>{
 });
 
 function operate(e){
-    if(e>=0 && e<=3){
+    if(e>=0 && e<=3 && key){
         operation+=operators[e].textContent;
         display.textContent=operation;
-    }else if(e===4){
+    }else if(e>=0 && e<=3 && key===false){
+        operation=eval(operation);
+        operation+=operators[e].textContent;
+        display.textContent=operation;
+        key=true;
 
-        if(operation===''){
-            display.textContent='Error'
-        }else{
+
+    }else if(e===4){
+        if(operation!==''){
             accumulated=operation;
             accumulated+=`=${eval(operation)}`;
             display.textContent=accumulated;
-            /* operation='' */
             key=false;
         }
     }else if(e===5){
         if(operation!=='' && key){
             operation=operation.substring(0,operation.length-1)
             display.textContent=operation;
-
         }
     }else{
         operation=''
@@ -41,9 +43,6 @@ function operate(e){
     
 
 };
-
-
-
 
 
 function enterNumber(i){
@@ -57,9 +56,9 @@ function enterNumber(i){
         }
     }else{
         operation='';
-        key=true;
         operation=numbers[i].value;
         display.textContent=operation;
+        key=true;
     }
 };
 
