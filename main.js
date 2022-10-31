@@ -2,7 +2,7 @@ const display=document.querySelector('.display');
 const operators=document.querySelectorAll('.btn');
 const numbers=document.querySelectorAll('.btn_number');
 
-let key=true, operation='', accumulated='';
+let key=true, operation='', result;
 
 operators.forEach((x,i)=>{
     x.addEventListener('click', ()=>operate(i));
@@ -14,111 +14,74 @@ numbers.forEach((x,i)=>{
 });
 
 function operate(e){
-    if(e>=0 && e<=3 && key){
-        operation+=operators[e].textContent;
-        display.textContent=operation;
-    }else if(e>=0 && e<=3 && key===false){
-        operation=eval(operation);
-        operation+=operators[e].textContent;
-        display.textContent=operation;
-        key=true;
-
-
+    if(e>=0 && e<=3){
+        if(display.value!==''){
+            if(key){
+                operation=display.value;
+            }else{
+                if(operation===display.value){
+                    operation=result;
+                }else{
+                    operation=display.value;
+                }
+            }
+            operation+=operators[e].textContent;
+            display.value=operation;
+            key=true;
+        }
     }else if(e===4){
-        if(operation!==''){
-            accumulated=operation;
-            accumulated+=`=${eval(operation)}`;
-            display.textContent=accumulated;
+        if(display.value!==''){
+            if(key){
+                operation=display.value;
+                result=eval(operation);
+                operation+=`=${result}`;
+            }else{
+                if(operation!==display.value){
+                    operation=display.value;
+                    result=eval(operation);
+                    operation+=`=${result}`;
+                }
+            }
+            display.value=operation;
             key=false;
         }
     }else if(e===5){
-        if(operation!=='' && key){
-            operation=operation.substring(0,operation.length-1)
-            display.textContent=operation;
+        if(display.value!==''){
+            if(key){
+                operation=operation.substring(0,operation.length-1);
+            }else{
+                if(operation!==display.value){
+                    operation=operation.substring(0,operation.length-1);
+                }
+            }
+            display.value=operation;
         }
     }else{
-        operation=''
-        display.textContent=''
+        if(display.value!==''){
+            operation='';
+            display.value='';
+        }  
     }
-    
-
 };
-
 
 function enterNumber(i){
     if(key){
-        if(operation===''){
+        if(display.value===''){
             operation=numbers[i].value;
-            display.textContent=operation;
         }else{
             operation+=numbers[i].value;
-            display.textContent=operation;
         }
+        display.value=operation;
     }else{
-        operation='';
-        operation=numbers[i].value;
-        display.textContent=operation;
+        if(operation===display.value){
+            operation='';
+            operation=numbers[i].value;
+            display.value=operation;
+        }else{
+            operation=display.value;
+            operation+=numbers[i].value;
+        }
+        display.value=operation;
         key=true;
     }
 };
-
-
-
-
-
-
-
-/* sum.addEventListener('click', ()=>{
-    operator.textContent='+';
-    values[1].value=values[0].value;
-    values[0].value='';
-    values[0].focus();
-})
-subtraction.addEventListener('click', ()=>{
-    operator.textContent='-';
-    values[1].value=values[0].value;
-    values[0].value='';
-    values[0].focus();
-})
-multiplication.addEventListener('click', ()=>{
-    operator.textContent='*';
-    values[1].value=values[0].value;
-    values[0].value='';
-    values[0].focus();
-})
-division.addEventListener('click', ()=>{
-    operator.textContent='/';
-    values[1].value=values[0].value;
-    values[0].value='';
-    values[0].focus();
-})
-
-values[0].addEventListener("keyup", function(event){
-    event.preventDefault();
-    if(event.keyCode === 13 && values[0].value!=='' && values[1].value!==''){
-        equals.click();
-    }
-});
-
-equals.addEventListener('click', ()=>{
-    let a=+values[0].value;
-    let b=+values[1].value;
-    if(operator.textContent==='+'){
-        display.innerText=b+a;
-    }else if(operator.textContent==='-'){
-        display.innerText=b-a;
-    }else if(operator.textContent==='*'){
-        display.innerText=b*a;
-    }else if(operator.textContent==='/'){
-        display.innerText=b/a;
-    }else{
-        display.innerText='Error';
-    }
-});
-
-deleteAC.addEventListener('click', ()=>{
-    operator.textContent='';
-    display.innerText='';
-    values[0].value='';
-    values[1].value='';
-}); */

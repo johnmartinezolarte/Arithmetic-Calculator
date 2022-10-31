@@ -32,10 +32,11 @@ body{
     font-size: 2.5rem;
     font-weight: 600;
     height: 5rem;
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     padding-left: 0.5rem;
+    outline: none;
 }
 .group-button{
     display: flex;
@@ -45,25 +46,12 @@ body{
 .btn{
     border: none;
     background-color: gray;
+    color:black;
     font-size: 2rem;
     font-weight: 600;
     width: 3rem;
     height: 3.5rem;
     border-radius: 0.5rem;
-}
-.btn:hover, .btn_number:hover{
-    background-color: black;
-    color: white;
-}
-#borrar-todo, #borrar-caracter{
-    background-color: orange;
-    width: 4rem;
-}
-#borrar-todo:hover,#borrar-caracter:hover{
-    background-color: red;
-}
-#borrar-caracter{
-    font-size: 1.8rem;
 }
 .btn_number{
     border: none;
@@ -73,6 +61,33 @@ body{
     height: 3rem;
     border-radius: 0.4rem;
 }
+.borrar{
+    background-color: orange;
+    width: 4rem;
+}
+.borrar-caracter{
+    font-size: 1.8rem;
+}
+.btn-enabled:hover, .btn_number:hover, .btn-igual-enabled:hover{
+    background-color: black;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.borrar:hover{
+    background-color: red;
+    color: black;
+}
+.btn-igual-enabled:hover{
+    background-color: #198754;
+}
+.btn-enabled:active, .btn_number:active, .btn-igual-enabled:active{
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.igual:disabled{
+    opacity: 70%;
+}
 .footer{
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
