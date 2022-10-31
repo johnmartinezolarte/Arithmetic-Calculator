@@ -1,8 +1,9 @@
-const display=document.querySelector('.display');
+const displayOperation=document.querySelector('.display-operation');
+const displayResult=document.querySelector('.display-result');
 const operators=document.querySelectorAll('.btn');
 const numbers=document.querySelectorAll('.btn_number');
 
-let key=true, operation='', result;
+let key=true, operation, result;
 
 operators.forEach((x,i)=>{
     x.addEventListener('click', ()=>operate(i));
@@ -15,73 +16,71 @@ numbers.forEach((x,i)=>{
 
 function operate(e){
     if(e>=0 && e<=3){
-        if(display.value!==''){
+        if(displayOperation.value!==''){
             if(key){
-                operation=display.value;
+                operation=displayOperation.value;
             }else{
-                if(operation===display.value){
+                if(operation===displayOperation.value){
                     operation=result;
                 }else{
-                    operation=display.value;
+                    operation=displayOperation.value;
                 }
+                key=true;
             }
             operation+=operators[e].textContent;
-            display.value=operation;
-            key=true;
+            displayOperation.value=operation;
+            displayResult.innerHTML='';
         }
     }else if(e===4){
-        if(display.value!==''){
+        if(displayOperation.value!==''){
             if(key){
-                operation=display.value;
-                result=eval(operation);
-                operation+=`=${result}`;
+                operation=displayOperation.value;
+                result=Math.round(eval(operation)*100)/100;
+                displayResult.innerHTML=result;
+                key=false;
             }else{
-                if(operation!==display.value){
-                    operation=display.value;
-                    result=eval(operation);
-                    operation+=`=${result}`;
+                if(operation!==displayOperation.value){
+                    operation=displayOperation.value;
+                    result=Math.round(eval(operation)*100)/100;
+                    displayResult.innerHTML=result;
                 }
             }
-            display.value=operation;
-            key=false;
         }
     }else if(e===5){
-        if(display.value!==''){
-            if(key){
-                operation=operation.substring(0,operation.length-1);
-            }else{
-                if(operation!==display.value){
-                    operation=operation.substring(0,operation.length-1);
-                }
-            }
-            display.value=operation;
+        if(displayOperation.value!==''){
+            /* operation=displayOperation.value; */
+            operation=operation.substring(0,operation.length-1);
+            displayOperation.value=operation;
+            displayResult.innerHTML='';
         }
     }else{
-        if(display.value!==''){
+        if(displayOperation.value!==''){
             operation='';
-            display.value='';
+            displayOperation.value='';
+            displayResult.innerHTML='';
         }  
     }
 };
 
 function enterNumber(i){
     if(key){
-        if(display.value===''){
-            operation=numbers[i].value;
-        }else{
-            operation+=numbers[i].value;
-        }
-        display.value=operation;
+        operation=displayOperation.value;
+        operation+=numbers[i].value;
     }else{
-        if(operation===display.value){
-            operation='';
-            operation=numbers[i].value;
-            display.value=operation;
-        }else{
-            operation=display.value;
-            operation+=numbers[i].value;
-        }
-        display.value=operation;
+/* 
+        if(){
+
+        } */
+
+
+
+
+
+
+        operation=displayOperation.value;
+        operation+=numbers[i].value;
         key=true;
     }
+    displayOperation.value=operation;
+    displayResult.innerHTML='';
 };
