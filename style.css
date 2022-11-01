@@ -46,10 +46,11 @@ body{
 }
 .display-operation::placeholder{
     font-size: 2rem;
-    opacity: 60%;
+    opacity: 62%;
 }
 .display-result{
     background-color:bisque;
+    font-size: 3.5rem;
     border-top: none;
     display: flex;
     justify-content: end;
