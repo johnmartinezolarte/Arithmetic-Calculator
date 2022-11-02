@@ -3,8 +3,10 @@ const displayResult=document.querySelector('.display-result');
 const operators=document.querySelectorAll('.btn');
 const numbers=document.querySelectorAll('.btn_number');
 
-let key=true, operation, accumulated, result;
-const checkOperation=/^[1-9][0-9]*(?:[/*+-][1-9][0-9]*)*$/;
+let key=true, operation, accumulated, replaced, result;
+/* const checkOperation=/^[1-9][0-9]*(?:[/*+-][1-9][0-9]*)*$/; */
+const checkOperation=/^-?\d+(?:[.]\d+)?(?:[/*+-]-?\d+(?:[.]\d+)?)*$/;
+const reg = /(--){1}/g;
 
 operators.forEach((x,i)=>{
     x.addEventListener('click', ()=>operate(i));
@@ -18,25 +20,25 @@ numbers.forEach((x,i)=>{
 displayOperation.addEventListener("keyup", function(event){
     event.preventDefault();
     if(event.keyCode===13){
-        operators[4].click();
+        operators[5].click();
     }
 });
 displayOperation.addEventListener('input', typing);
 
 function typing(){
     if(checkOperation.test(displayOperation.value)){
-        operators[4].disabled=false;
-        operators[4].classList.add('btn-igual-enabled');
+        operators[5].disabled=false;
+        operators[5].classList.add('btn-igual-enabled');
     }else{
-        operators[4].disabled=true;
-        operators[4].classList.remove('btn-igual-enabled')
+        operators[5].disabled=true;
+        operators[5].classList.remove('btn-igual-enabled')
     }
     displayResult.innerHTML='';
     key=true;
 }
 
 function operate(e){
-    if(e>=0 && e<=3){
+    if(e>=0 && e<=4){
         if(displayOperation.value!==''){
             if(key){
                 operation=displayOperation.value;
@@ -47,29 +49,46 @@ function operate(e){
                     operation=displayOperation.value;
                 }
                 key=true;
+                result='';
             }
             operation+=operators[e].textContent;
             displayOperation.value=operation;
             displayResult.innerHTML='';
             operation='';
             accumulated='';
+        }else{
+            if(e===1){
+                if(!key){
+                    result='';
+                    key=true;
+                }
+                operation=displayOperation.value;
+                operation+=operators[e].textContent;
+                displayOperation.value=operation;
+                displayResult.innerHTML='';
+                operation='';
+                accumulated='';
+            }
         }
-    }else if(e===4){
+    }else if(e===5){
         if(displayOperation.value!==''){
             if(key){
                 accumulated=displayOperation.value;
-                result=Math.round(eval(accumulated)*100)/100;
+                replaced=accumulated.replace(reg, "+");
+                result=Math.round(eval(replaced)*100)/100;
                 displayResult.innerHTML=result;
                 key=false;
             }else{
                 if(accumulated!==displayOperation.value){
                     accumulated=displayOperation.value;
-                    result=Math.round(eval(accumulated)*100)/100;
+                    replaced=accumulated.replace(reg, "+");
+                    result=Math.round(eval(replaced)*100)/100;
                     displayResult.innerHTML=result;
                 }
             }
+            replaced='';
         }
-    }else if(e===5){
+    }else if(e===6){
         if(displayOperation.value!==''){
             operation=displayOperation.value;
             operation=operation.substring(0,operation.length-1);
@@ -89,11 +108,11 @@ function operate(e){
         }  
     }
     if(checkOperation.test(displayOperation.value)){
-        operators[4].disabled=false;
-        operators[4].classList.add('btn-igual-enabled');
+        operators[5].disabled=false;
+        operators[5].classList.add('btn-igual-enabled');
     }else{
-        operators[4].disabled=true;
-        operators[4].classList.remove('btn-igual-enabled')
+        operators[5].disabled=true;
+        operators[5].classList.remove('btn-igual-enabled')
     }
     displayOperation.focus();
 };
@@ -115,12 +134,13 @@ function enterNumber(i){
     displayResult.innerHTML='';
     operation='';
     accumulated='';
+    result='';
     if(checkOperation.test(displayOperation.value)){
-        operators[4].disabled=false;
-        operators[4].classList.add('btn-igual-enabled');
+        operators[5].disabled=false;
+        operators[5].classList.add('btn-igual-enabled');
     }else{
-        operators[4].disabled=true;
-        operators[4].classList.remove('btn-igual-enabled')
+        operators[5].disabled=true;
+        operators[5].classList.remove('btn-igual-enabled')
     }
     displayOperation.focus();
 };
