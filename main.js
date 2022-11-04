@@ -4,9 +4,14 @@ const operators=document.querySelectorAll('.btn');
 const numbers=document.querySelectorAll('.btn_number');
 
 let key=true, operation, accumulated, replaced, result;
-/* const checkOperation=/^[1-9][0-9]*(?:[/*+-][1-9][0-9]*)*$/; */
-const checkOperation=/^-?\d+(?:[.]\d+)?(?:[/*+-]-?\d+(?:[.]\d+)?)*$/;
-const reg = /(--){1}/g;
+
+/* const checkOperation=/^[1-9][0-9]*(?:[/*+-][1-9][0-9]*)*$/; */ //Solamente números enteros positivos
+
+/* const checkOperation=/^-?\d+(?:[.]\d+)?(?:[/*+-]-?\d+(?:[.]\d+)?)*$/; */ //Números enteros, decimales y negativos pero que pueden generar resultados inesperados en expresiones que empiecen en 0 ('012*2')
+
+const checkOperation=/^-?([1-9]\d*[.]?\d*|0?[.]\d+|0[.]?)(?:[/*+-]-?([1-9]\d*[.]?\d*|0?[.]\d+|0[.]?))*$/; //Valores que podria manipular JS sin generar resultados inesperados (excepto '--')
+
+const reg = /(--){1}/g; //Encontrar dos negativos juntos ('--') en toda la expresión
 
 operators.forEach((x,i)=>{
     x.addEventListener('click', ()=>operate(i));
@@ -23,6 +28,7 @@ displayOperation.addEventListener("keyup", function(event){
         operators[5].click();
     }
 });
+
 displayOperation.addEventListener('input', typing);
 
 function typing(){
@@ -48,40 +54,38 @@ function operate(e){
                 }else{
                     operation=displayOperation.value;
                 }
-                key=true;
-                result='';
             }
             operation+=operators[e].textContent;
             displayOperation.value=operation;
             displayResult.innerHTML='';
             operation='';
             accumulated='';
+            result='';
+            key=true;
         }else{
-            if(e===1){
-                if(!key){
-                    result='';
-                    key=true;
-                }
+            if(e===1 || e===4){
                 operation=displayOperation.value;
                 operation+=operators[e].textContent;
                 displayOperation.value=operation;
                 displayResult.innerHTML='';
                 operation='';
                 accumulated='';
+                result='';
+                key=true;
             }
         }
     }else if(e===5){
         if(displayOperation.value!==''){
             if(key){
                 accumulated=displayOperation.value;
-                replaced=accumulated.replace(reg, "+");
+                replaced=accumulated.replace(reg, "+"); //Reemplazar '--' por '+'
                 result=Math.round(eval(replaced)*100)/100;
                 displayResult.innerHTML=result;
                 key=false;
             }else{
                 if(accumulated!==displayOperation.value){
                     accumulated=displayOperation.value;
-                    replaced=accumulated.replace(reg, "+");
+                    replaced=accumulated.replace(reg, "+"); //Reemplazar '--' por '+'
                     result=Math.round(eval(replaced)*100)/100;
                     displayResult.innerHTML=result;
                 }
