@@ -63,7 +63,8 @@ function operate(e){
             result='';
             key=true;
         }else{
-            if(e===1 || e===4){
+            //Before: e===1 || e===4
+            if(e===0 || e===1 || e===4){
                 operation=displayOperation.value;
                 operation+=operators[e].textContent;
                 displayOperation.value=operation;
